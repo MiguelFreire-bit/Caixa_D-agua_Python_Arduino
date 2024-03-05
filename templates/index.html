@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Projeto</title>
+</head>
+<body>
+    <h1>Bem-vindo ao Seu Projeto</h1>
+    
+    <p id="nivel_minimo">Nível Mínimo: </p>
+    <p id="nivel_50">Nível 50%: </p>
+    <p id="nivel_100">Nível 100%: </p>
+    <p id="bomba_estado">Estado da Bomba: </p>
+
+    <script>
+        function atualizarDados() {
+            fetch('/atualizar_dados', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('nivel_minimo').innerText = 'Nível Mínimo: ' + data.nivel_minimo;
+                    document.getElementById('nivel_50').innerText = 'Nível 50%: ' + data.nivel_50;
+                    document.getElementById('nivel_100').innerText = 'Nível 100%: ' + data.nivel_100;
+                    document.getElementById('bomba_estado').innerText = 'Estado da Bomba: ' + data.bomba_estado;
+                });
+        }
+
+        // Atualiza os dados a cada 5 segundos
+        setInterval(atualizarDados, 5000);
+    </script>
+</body>
+</html>
