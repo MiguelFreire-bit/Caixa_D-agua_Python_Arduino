@@ -4,24 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seu Projeto</title>
+    <!-- Adicione o link para a biblioteca Font Awesome (substitua pelo seu próprio link se necessário) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xw9J29/uZqfCH5x5ihIypkNT5D9PXvkypZKAxl9ckBgrbBuX8PB3EKiV33L6DCdNLDqy3oJN6H9lC1uq3/2H4xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #02407e, #66ffff); /* Adiciona o efeito degradê de azul escuro para verde-água */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #00FFFF;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background-color: #00FFFF;
+            padding: 20px;
+            padding-left: 150px;
+            padding-right: 150px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave à caixa */
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        p {
+            color: #2c3e50;
+        }
+
+        .icon {
+            font-size: 24px;
+            margin-right: 8px;
+        }
+
+        .icon-water {
+            color: #3498db;
+        }
+
+        .icon-bomb {
+            color: #e74c3c;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bem-vindo ao Seu Projeto</h1>
-    
-    <p id="nivel_minimo">Nível Mínimo: </p>
-    <p id="nivel_50">Nível 50%: </p>
-    <p id="nivel_100">Nível 100%: </p>
-    <p id="bomba_estado">Estado da Bomba: </p>
+    <h1>
+        <img src="{{ url_for('static', filename='icones/droplet-solid.svg') }}" alt="Ícone de gota d'água" height="30" width="30">
+        Bem-vindo ao Seu Projeto
+    </h1>
 
+    <!-- Caixa de informações -->
+    <div class="info-box">
+        <p id="nivel_minimo">Nível Mínimo: </p>
+        <p id="nivel_50">Nível 50%: </p>
+        <p id="nivel_100">Nível 100%: </p>
+        <p id="bomba_estado">Estado da Bomba: </p>
+    </div>
     <script>
-        function atualizarDados() {
+         function atualizarDados() {
             fetch('/atualizar_dados', { method: 'POST' })
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('nivel_minimo').innerText = 'Nível Mínimo: ' + data.nivel_minimo;
-                    document.getElementById('nivel_50').innerText = 'Nível 50%: ' + data.nivel_50;
-                    document.getElementById('nivel_100').innerText = 'Nível 100%: ' + data.nivel_100;
-                    document.getElementById('bomba_estado').innerText = 'Estado da Bomba: ' + data.bomba_estado;
+                    document.getElementById('nivel_minimo').innerHTML = `<i class="icon icon-water fas fa-tint"></i>Nível Mínimo: ${data.nivel_minimo}`;
+                    document.getElementById('nivel_50').innerHTML = `<i class="icon icon-water fas fa-tint"></i>Nível 50%: ${data.nivel_50}`;
+                    document.getElementById('nivel_100').innerHTML = `<i class="icon icon-water fas fa-tint"></i>Nível 100%: ${data.nivel_100}`;
+                    document.getElementById('bomba_estado').innerHTML = `<i class="icon icon-bomb fas fa-bolt"></i>Estado da Bomba: ${data.bomba_estado}`;
                 });
         }
 

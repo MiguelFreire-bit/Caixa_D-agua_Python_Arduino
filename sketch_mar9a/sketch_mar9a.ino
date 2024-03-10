@@ -6,8 +6,6 @@ int ledsCaixa[] = {3, 4, 5};
 int sensores[] = {6, 7, 8};
 int nLedsCaixa = sizeof(ledsCaixa) / sizeof(ledsCaixa[0]);
 
-// Estado anterior dos sensores
-//bool estadoAnteriorSensores[] = {HIGH, HIGH, HIGH};
 
 // Estado da caixa d'água
 enum NivelAgua { MINIMO, NIVEL_50, NIVEL_100 };
@@ -15,7 +13,7 @@ NivelAgua nivelAgua = MINIMO;
 
 // Temporizador para envio de dados
 unsigned long lastDataSendTime = 0;
-const unsigned long dataSendInterval = 3000;  // Intervalo de envio em milissegundos
+const unsigned long dataSendInterval = 6000;  // Intervalo de envio em milissegundos
 
 void setup() {
   Serial.begin(9600);
