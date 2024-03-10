@@ -18,6 +18,7 @@ def atualizar_dados():
     # Lê os dados do Arduino
     ser.write(b'r')  # Comando para solicitar dados
     dados = ser.readline().decode('utf-8').strip().split(',')
+    print(dados)
 
 
     dados_arduino = {
