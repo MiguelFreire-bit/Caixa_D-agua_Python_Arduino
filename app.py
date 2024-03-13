@@ -47,7 +47,7 @@ def atualizar_dados():
                 "nivel_100": str(dados_json.get("nivel_100", False)),
                 "bomba_estado": "Ligada" if dados_json.get("bomba_estado", False) else "Desligada"
             }
-
+            print(dados_arduino)
             return jsonify(dados_arduino)
         except json.JSONDecodeError as e:
             return jsonify({"error": str(e)}), 400  # Retorna um erro 400 se houver problema no JSON

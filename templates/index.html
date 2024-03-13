@@ -17,6 +17,10 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            border: 20px solid;
+            border-image: linear-gradient(to right, #001F3F, #66ffff, #001F3F, #66ffff, #001F3F);
+            border-image-slice: 1; /* Garante que a borda use a imagem linear completa */
+            box-sizing: border-box; /* Adiciona esta linha para incluir a borda no tamanho total */
         }
 
         h1 {
@@ -56,7 +60,7 @@
 <body>
     <h1>
         <img src="{{ url_for('static', filename='icones/droplet-solid.svg') }}" alt="Ícone de gota d'água" height="30" width="30">
-        Bem-vindo ao Seu Projeto
+        Caixa D'água: Monitoramento de nível
         <img src="{{ url_for('static', filename='icones/droplet-slash-solid.svg') }}" alt="Ícone de gota d'água" height="35" width="35">
     </h1>
 
@@ -68,19 +72,24 @@
         <p id="bomba_estado">Estado da Bomba: </p>
     </div>
     <script>
-         function atualizarDados() {
+        function atualizarDados() {
             fetch('/atualizar_dados', { method: 'POST' })
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('nivel_minimo').innerHTML = `<i class="icon icon-water fas fa-tint"></i>Nível Mínimo: ${data.nivel_minimo}`;
-                    document.getElementById('nivel_50').innerHTML = `<i class="icon icon-water fas fa-tint"></i>Nível 50%: ${data.nivel_50}`;
-                    document.getElementById('nivel_100').innerHTML = `<i class="icon icon-water fas fa-tint"></i>Nível 100%: ${data.nivel_100}`;
-                    document.getElementById('bomba_estado').innerHTML = `<i class="icon icon-bomb fas fa-bolt"></i>Estado da Bomba: ${data.bomba_estado}`;
-                });
+                    document.getElementById('nivel_minimo').innerHTML = `Nível Mínimo: ${data.nivel_minimo}`;
+                    document.getElementById('nivel_50').innerHTML = `Nível 50%: ${data.nivel_50}`;
+                    document.getElementById('nivel_100').innerHTML = `Nível 100%: ${data.nivel_100}`;
+                    document.getElementById('bomba_estado').innerHTML = `Estado da Bomba: ${data.bomba_estado}`;
+                })
+                .catch(error => console.error('Erro ao atualizar dados:', error));
         }
-
+    
         // Atualiza os dados a cada 5 segundos
         setInterval(atualizarDados, 5000);
+    
+        // Chama a função inicialmente para exibir os dados
+        atualizarDados();
     </script>
+    
 </body>
 </html>
