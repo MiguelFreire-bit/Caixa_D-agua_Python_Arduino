@@ -13,7 +13,7 @@ NivelAgua nivelAgua = MINIMO;
 
 // Temporizador para envio de dados
 unsigned long lastDataSendTime = 0;
-const unsigned long dataSendInterval = 6000;  // Intervalo de envio em milissegundos
+const unsigned long dataSendInterval = 7000;  // Intervalo de envio em milissegundos
 
 void setup() {
   Serial.begin(9600);
